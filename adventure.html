@@ -53,7 +53,7 @@
         };
 
 		function preload() {
-
+            game.load.script('webfont', '//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
 			game.load.tilemap('level1', 'assets/games/starstruck/level1.json', null, Phaser.Tilemap.TILED_JSON);
 			game.load.image('tiles-1', 'assets/games/starstruck/tiles-1.png');
 			game.load.spritesheet('dude', 'assets/games/starstruck/dude.png', 32, 48);
@@ -129,8 +129,8 @@ stars = game.add.group();
     stars.enableBody = true;
     for (var i = 0; i < 24; i+=0.1)
     {
-    	var star_random = Math.floor(Math.random() * 3) + 1
-    	if (star_random == 1) {
+        var star_random = Math.floor(Math.random() * 3) + 1
+        if (star_random == 1) {
 
 
 
@@ -142,7 +142,7 @@ stars = game.add.group();
         star.body.gravity.y = 300;
 
         //  This just gives each star a slightly random bounce value
-        star.body.bounce.y = 0.7 + Math.random() * 0.2;
+        star.body.bounce.y = 0.7 + Math.random() * 0.01;
     } else if (star_random == 2) {
                 //  Create a star inside of the 'stars' group
                 var star = stars.create(Math.floor(Math.random() * 800) + 1, i * 100, 'blue');
@@ -152,36 +152,36 @@ stars = game.add.group();
         star.body.gravity.y = 300;
 
         //  This just gives each star a slightly random bounce value
-        star.body.bounce.y = 0.7 + Math.random() * 0.2;
+        star.body.bounce.y = 0.7 + Math.random() * 0.01;
     } else {
                 //  Create a star inside of the 'stars' group
                 var star = stars.create(Math.floor(Math.random() * 800) + 1, i * 100, 'green');
-                star.tint = 0xffffff;
+                star.tint =0xffffff;
 
         //  Let gravity do its thing
         star.body.gravity.y = 300;
 
         //  This just gives each star a slightly random bounce value
-        star.body.bounce.y = 0.7 + Math.random() * 0.2;
+        star.body.bounce.y = 0.7 + Math.random() * 0.01;
     }
 }
 
     //  The score
-    scoreText = game.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#fff' });
+    scoreText = game.add.text(16, 16, 'Score: 0', { fontSize: '32px', fill: '#fff' });
     scoreText.fixedToCamera = true;
-    // scoreText.font = 'Revalia';
-    // scoreText.fontSize = 32;
+    scoreText.font = 'Revalia';
+    scoreText.fontSize = 32;
 
     //  Our controls.
     cursors = game.input.keyboard.createCursorKeys();
 
 
-    stateText = game.add.text(game.camera.width / 2, game.camera.height / 2,' ', { font: '84px', fill: '#fff' });
+    stateText = game.add.text(game.camera.width / 2, game.camera.height / 2,' ', {fontSize: '85px', fill: '#fff' });
     stateText.anchor.setTo(.5);
     // stateText.visible = false;
     stateText.fixedToCamera = true;
-    // scoreText.font = 'Revalia';
-    // scoreText.fontSize = 60;
+    stateText.font = 'Revalia';
+    stateText.fontSize = 60;
 
 }
 
@@ -254,7 +254,7 @@ function render () {
 
 function render() {
 
-	game.debug.text("Time left: " + Math.round(game.time.events.duration/1000), 550, 35);
+	game.debug.text("Time left: " + Math.round(game.time.events.duration/1000), 650, 35);
 
 }
 
