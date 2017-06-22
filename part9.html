@@ -127,7 +127,7 @@
 }
 
     //  The score
-    scoreText = game.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
+    scoreText = game.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#ff000' });
 
     //  Our controls.
     cursors = game.input.keyboard.createCursorKeys();
@@ -186,6 +186,15 @@ function collectStar (player, star) {
     scoreText.text = 'Score: ' + score;
 
 }
+
+function saveScore () {
+
+localStorage.setItem('score', 'score');
+
+
+}
+
+localStorage.setItem('myItemKey', 'myContent');
 
 </script>
 
