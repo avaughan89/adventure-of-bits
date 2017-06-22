@@ -45,7 +45,7 @@ var scoreText;
 
 function create() {
 
-game.time.events.add(Phaser.Timer.SECOND * 4, endGame, this);
+game.time.events.add(Phaser.Timer.SECOND * 12, endGame, this);
 
 game.physics.startSystem(Phaser.Physics.ARCADE);
 
@@ -134,8 +134,8 @@ jumpButton = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
     cursors = game.input.keyboard.createCursorKeys();
 
 
-        stateText = game.add.text(game.world.width / 2, game.world.height / 2,' ', { font: '84px Arial', fill: '#fff' });
-    // stateText.anchor.setTo(.5);
+        stateText = game.add.text(game.camera.width / 2, game.camera.height / 2,' ', { font: '84px Arial', fill: '#fff' });
+    stateText.anchor.setTo(.5);
     // stateText.visible = false;
     stateText.fixedToCamera = true;
 
@@ -156,7 +156,7 @@ player.body.velocity.x = 1;
 
 if (cursors.left.isDown)
 {
-	player.body.velocity.x = -150;
+	player.body.velocity.x = -250;
 
 	if (facing != 'left')
 	{
@@ -166,7 +166,7 @@ if (cursors.left.isDown)
 }
 else if (cursors.right.isDown)
 {
-	player.body.velocity.x = 150;
+	player.body.velocity.x = 250;
 
 	if (facing != 'right')
 	{
@@ -195,7 +195,7 @@ facing = 'idle';
 
 if (jumpButton.isDown && player.body.onFloor())
 {
-	player.body.velocity.y = -250;
+	player.body.velocity.y = -350;
 	jumpTimer = game.time.now + 1;
 }
 
@@ -211,7 +211,7 @@ function render () {
 
 function render() {
 
-    game.debug.text("Time until event: " + game.time.events.duration, 550, 35);
+    game.debug.text("Time left: " + Math.round(game.time.events.duration/1000), 550, 35);
 
 }
 
@@ -228,8 +228,9 @@ function collectStar (player, star) {
 
 function endGame () {
 
-	stateText.text=" GAME OVER \n Click to restart";
+	stateText.text=" GAME OVER \n " + " Score: " + score;
 	stateText.visible = true;
+	player.kill();
 
 }
 // TODO
