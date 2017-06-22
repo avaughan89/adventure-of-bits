@@ -45,6 +45,8 @@ var scoreText;
 
 function create() {
 
+game.time.events.add(Phaser.Timer.SECOND * 4, endGame, this);
+
 game.physics.startSystem(Phaser.Physics.ARCADE);
 
 game.stage.backgroundColor = '#000000';
@@ -88,7 +90,7 @@ jumpButton = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
 
     //  We will enable physics for any star that is created in this group
     stars.enableBody = true;
-    for (var i = 0; i < 24; i+=0.5)
+    for (var i = 0; i < 24; i+=0.1)
     {
         var star_random = Math.floor(Math.random() * 3) + 1
         if (star_random == 1) {
@@ -131,6 +133,11 @@ jumpButton = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
     //  Our controls.
     cursors = game.input.keyboard.createCursorKeys();
 
+
+        stateText = game.add.text(game.world.width / 2, game.world.height / 2,' ', { font: '84px Arial', fill: '#fff' });
+    // stateText.anchor.setTo(.5);
+    // stateText.visible = false;
+    stateText.fixedToCamera = true;
 
 
 }
@@ -202,6 +209,12 @@ function render () {
 
 }
 
+function render() {
+
+    game.debug.text("Time until event: " + game.time.events.duration, 550, 35);
+
+}
+
 function collectStar (player, star) {
 
     // Removes the star from the screen
@@ -213,7 +226,12 @@ function collectStar (player, star) {
 
 }
 
+function endGame () {
 
+	stateText.text=" GAME OVER \n Click to restart";
+	stateText.visible = true;
+
+}
 // TODO
 // function impactEnemy (player, enemy) {
 
