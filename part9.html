@@ -90,7 +90,7 @@
     stars.enableBody = true;
 
     //  Here we'll create 12 of them evenly spaced apart
-    for (var i = 0; i < 12; i++)
+    for (var i = 0; i < 27; i++)
     {
         var star_random = Math.floor(Math.random() * 3) + 1
         if (star_random == 1) {
@@ -127,7 +127,7 @@
 }
 
     //  The score
-    scoreText = game.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#ff000' });
+    scoreText = game.add.text(16, 16, 'score: 0', { fontSize: '3200px', fill: '#ff000' });
 
     //  Our controls.
     cursors = game.input.keyboard.createCursorKeys();
@@ -187,14 +187,19 @@ function collectStar (player, star) {
 
 }
 
-function saveScore () {
 
-localStorage.setItem('score', 'score');
+// TODO
+// function impactEnemy (player, enemy) {
 
+//     // Removes the star from the screen
+//     player.kill();
 
-}
+//     //  Add and update the score
+//     score -= 10;
+//     scoreText.text = 'Score: ' + score;
 
-localStorage.setItem('myItemKey', 'myContent');
+// }
+
 
 </script>
 
