@@ -64,6 +64,10 @@
 			game.load.image('pink', 'assets/hex_pink.png');
 			game.load.image('blue', 'assets/hex_blue.png');
 			game.load.image('green', 'assets/hex_green.png');
+            game.load.image('diamond', 'assets/diamond.png');
+            game.load.image('star', 'assets/star.png');
+            game.load.image('datadoge', 'assets/datadoge_small.png');
+            game.load.image('doge', 'assets/doge.png');
 
 		}
 
@@ -79,6 +83,7 @@
 		var stars;
 		var score = 0;
 		var scoreText;
+        var emitter;
 
 		function create() {
 
@@ -98,6 +103,8 @@
 			map.setCollisionByExclusion([ 13, 14, 15, 16, 46, 47, 48, 49, 50, 51 ]);
 
 			layer = map.createLayer('Tile Layer 1');
+
+            
 
 //  Un-comment this on to see the collision tiles
 // layer.debug = true;
@@ -242,13 +249,16 @@ function update() {
     	jumpTimer = game.time.now + 1;
     }
 
+
+
 }
 
-function render () {
+function scoreBurst () {
 
-// game.debug.text(game.time.physicsElapsed, 32, 32);
-// game.debug.body(player);
-// game.debug.bodyInfo(player, 16, 24);
+    emitter = game.add.emitter(player.x, player.y, 15, 15);
+    emitter.makeParticles(['diamond', 'star']);
+
+    emitter.start(false, 5000, 20);
 
 }
 
@@ -266,6 +276,9 @@ function collectStar (player, star) {
     //  Add and update the score
     score += 10;
     scoreText.text = 'Score: ' + score;
+    if (score % 100 == 0){
+        scoreBurst();
+    }
 
 }
 
@@ -274,8 +287,19 @@ function endGame () {
 	stateText.text=" GAME OVER\n " + "Score: " + score;
 	stateText.visible = true;
 	player.kill();
+    endDoge();
 
 }
+
+function endDoge () {
+
+    emitter = game.add.emitter(player.x, player.y, 75, 75);
+    emitter.makeParticles(['datadoge', 'doge']);
+
+    emitter.start(false, 5000, 20);
+
+}
+
 // TODO
 // function impactEnemy (player, enemy) {
 
