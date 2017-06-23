@@ -4,6 +4,7 @@
 	<meta charset="UTF-8" />
 	<title>Adventure of Bits</title>
 	<script type="text/javascript" src="js/phaser.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<style type="text/css">
 		body {
 			margin: 0;
@@ -17,7 +18,7 @@
 <body>
 
 <div class="error_page clearfix">
-  <div class="error_img"><img alt="sad datadog" id="sad_bits" src="assets/sad_bits.png"></div>
+  <div class="error_img"><img alt="sad datadog" id="sad_bits" src="assets/sad_bits.png" onclick="myFunction()"></div>
   <div class="error_msg">
     <p class="arf line-10 text-size-96 text-contrast-80 text-bold text-displayface">Arf.</p>
     <h1 class="line-10 text-size-48">404 Not Found</h1>
@@ -33,6 +34,20 @@
 <div id="phaser-example"></div>
 
 	<script type="text/javascript">
+    function myFunction() {
+    var x = document.getElementById('phaser-example');
+    if (x.style.visibility === 'hidden') {
+        x.style.visibility = 'visible';
+    } else {
+        x.style.visibility = 'hidden';
+    }
+}
+
+            $("body").keypress(function(key){
+            if (key.which == 188){
+                $("#phaser-example").show();
+            }
+        });
 
 
 		var game = new Phaser.Game(800, 600, Phaser.CANVAS, 'phaser-example', { preload: preload, create: create, update: update, render: render });
@@ -263,6 +278,8 @@ function scoreBurst () {
     stateText.text= burstWow[Math.floor(Math.random() * 2) + 1];
     stateText.visible = true;
     game.time.events.add(Phaser.Timer.SECOND * 1, fadeText, this);
+    game.time.events.add(Phaser.Timer.SECOND * 3, destroyEmitter, this);
+
     // setTimeout(3500)
     // stateText.visible = false;
     
@@ -272,6 +289,13 @@ function scoreBurst () {
 function fadeText () {
 
     stateText.visible = false;
+    
+
+}
+
+function destroyEmitter () {
+
+    emitter.destroy();
     
 
 }

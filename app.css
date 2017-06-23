@@ -5,6 +5,7 @@ span.alert_red{color:#e55447}span.alert_yellow{color:#edbe32}span.alert_grey{col
 	left: 30%;
 	margin: -100px 0 0 -150px;
 	padding-bottom: 150px;
+	visibility: hidden;
 }
 
 .error_page {
